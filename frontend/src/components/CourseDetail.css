@@ -1,0 +1,113 @@
+.course-detail-header {
+  margin-bottom: 30px;
+}
+
+.course-detail-header h1 {
+  margin-bottom: 10px;
+}
+
+.course-actions {
+  margin-top: 15px;
+  display: flex;
+  gap: 10px;
+}
+
+.reviews-list {
+  margin-top: 20px;
+}
+
+.review-card {
+  background: #f9f9f9;
+  border-left: 4px solid #007bff;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 4px;
+}
+
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 10px;
+}
+
+.rating {
+  color: #ffc107;
+  font-size: 18px;
+  margin-top: 5px;
+}
+
+.review-date {
+  color: #666;
+  font-size: 14px;
+}
+
+.review-comment {
+  color: #333;
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+
+.professor-reply {
+  background: #e7f3ff;
+  border-left: 4px solid #007bff;
+  padding: 12px;
+  margin-top: 15px;
+  border-radius: 4px;
+}
+
+.professor-reply strong {
+  display: block;
+  margin-bottom: 8px;
+  color: #007bff;
+}
+
+.reply-section {
+  margin-top: 10px;
+}
+
+.reply-form textarea {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-family: inherit;
+}
+
+.welcome-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh;
+  padding: 20px;
+}
+
+.welcome-card {
+  background: white;
+  border-radius: 12px;
+  padding: 40px;
+  max-width: 600px;
+  width: 100%;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.welcome-card h1 {
+  color: #007bff;
+  margin-bottom: 20px;
+  font-size: 32px;
+}
+
+.welcome-message {
+  font-size: 18px;
+  color: #666;
+  margin-bottom: 30px;
+  line-height: 1.6;
+}
+
+.welcome-actions {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+
