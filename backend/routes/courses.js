@@ -2,12 +2,16 @@ const express = require('express');
 const router = express.Router();
 const Course = require('../models/Course');
 const StudentProfessorMapping = require('../models/StudentProfessorMapping');
+const Review = require('../models/Review');
 const { isAuthenticated, isProfessor } = require('../middleware/auth');
 
 // Get all courses with average ratings
 router.get('/', async (req, res) => {
   try {
-    const Review = require('../models/Review');
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 10;
+    const skip = (page - 1) * limit;
+
     let courses;
 
     // Filter courses based on user role
@@ -76,7 +80,20 @@ router.get('/', async (req, res) => {
       })
     );
 
-    res.json(coursesWithRatings);
+    // Apply pagination
+    const totalCourses = coursesWithRatings.length;
+    const paginatedCourses = coursesWithRatings.slice(skip, skip + limit);
+
+    res.json({
+      courses: paginatedCourses,
+      pagination: {
+        currentPage: page,
+        totalPages: Math.ceil(totalCourses / limit),
+        totalCourses,
+        hasNext: page * limit < totalCourses,
+        hasPrev: page > 1
+      }
+    });
   } catch (error) {
     res.status(500).json({ message: 'Error fetching courses', error: error.message });
   }

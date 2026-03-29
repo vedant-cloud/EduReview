@@ -21,7 +21,8 @@ const CourseList = ({ user }) => {
   const fetchCourses = async () => {
     try {
       const response = await axios.get('/api/courses');
-      const coursesData = response.data || [];
+      const data = response.data;
+      const coursesData = data.courses || [];
       
       // Backend already filters correctly:
       // - Students: only courses from mapped professors

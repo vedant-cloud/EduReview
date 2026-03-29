@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const User = require('../models/User');
-require('dotenv').config();
+const path = require('path');
+require('dotenv').config({ path: path.resolve(__dirname, '..', '..', '.env') });
 
 async function initAdmin() {
   try {

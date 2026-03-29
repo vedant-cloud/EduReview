@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/User');
 const StudentProfessorMapping = require('../models/StudentProfessorMapping');
+const Course = require('../models/Course');
+const Review = require('../models/Review');
 const { isAuthenticated, isAdmin } = require('../middleware/auth');
 
 // Get all students
@@ -100,6 +102,16 @@ router.delete('/mappings/:mappingId', isAuthenticated, isAdmin, async (req, res)
       return res.status(404).json({ message: 'Mapping not found' });
     }
 
+    // Delete all reviews by this student for courses from this professor
+    const courses = await Course.find({ professor: mapping.professor });
+    const courseIds = courses.map(c => c._id);
+    if (courseIds.length > 0) {
+      await Review.deleteMany({ 
+        student: mapping.student, 
+        course: { $in: courseIds } 
+      });
+    }
+
     await StudentProfessorMapping.findByIdAndDelete(req.params.mappingId);
     res.json({ message: 'Mapping deleted successfully' });
   } catch (error) {
@@ -187,9 +199,6 @@ router.delete('/users/:userId', isAuthenticated, isAdmin, async (req, res) => {
     if (user._id.toString() === req.user._id.toString()) {
       return res.status(400).json({ message: 'Cannot delete your own account' });
     }
-
-    const Course = require('../models/Course');
-    const Review = require('../models/Review');
 
     if (user.role === 'professor') {
       // Delete all courses created by this professor

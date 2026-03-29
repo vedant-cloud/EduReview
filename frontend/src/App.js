@@ -7,6 +7,7 @@ import Signup from './components/Signup';
 import CourseList from './components/CourseList';
 import CourseDetail from './components/CourseDetail';
 import CreateCourse from './components/CreateCourse';
+import EditCourse from './components/EditCourse';
 import AdminDashboard from './components/AdminDashboard';
 import './App.css';
 
@@ -64,9 +65,14 @@ function App() {
               element={user && user.role === 'professor' ? <CreateCourse user={user} /> : <Navigate to="/" />} 
             />
             <Route 
+              path="/edit-course/:id" 
+              element={user && user.role === 'professor' ? <EditCourse user={user} /> : <Navigate to="/" />} 
+            />
+            <Route 
               path="/admin" 
               element={user && user.role === 'admin' ? <AdminDashboard user={user} /> : <Navigate to="/" />} 
             />
+            <Route path="*" element={<div className="container"><h1>404 - Page Not Found</h1><p>The page you're looking for doesn't exist.</p></div>} />
           </Routes>
         </div>
       </div>
